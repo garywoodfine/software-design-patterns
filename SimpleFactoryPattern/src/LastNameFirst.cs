@@ -6,13 +6,12 @@ namespace SimpleFactory
     {
        public LastNameFirst(string username)
        {
-            var index = username.Trim().IndexOf(",");
-            if(index > 0)
-            {
-               lastName = username.Substring(0,index).Trim();
-               firstName = username.Substring(index + 1).Trim();
+            var index = username.Trim().IndexOf(",", StringComparison.Ordinal);
 
-            }
+           if (index <= 0) return;
+
+           LastName = username.Substring(0,index).Trim();
+           FirstName = username.Substring(index + 1).Trim();
        }
     }
 }
