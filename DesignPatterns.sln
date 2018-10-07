@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleFactoryPattern", "SimpleFactoryPattern", "{37ED1E56-996C-48BD-94EF-3B52E5600F82}"
+ProjectSection(SolutionItems) = preProject
+	SimpleFactoryPattern\READ.md = SimpleFactoryPattern\READ.md
+EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFactory", "SimpleFactoryPattern\src\SimpleFactory.csproj", "{6331802F-2943-4AD8-B846-159213C2A4B4}"
 EndProject
