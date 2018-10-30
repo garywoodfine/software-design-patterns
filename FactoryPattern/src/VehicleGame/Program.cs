@@ -7,7 +7,7 @@ namespace VehicleGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter a number of wheels between 2 and 12 to build a vehicle and press enter");
+            Console.WriteLine("Enter a number of wheels between 1 and 12 to build a vehicle and press enter");
            
             var wheels = Console.ReadLine();
             var vehicle = VehicleFactory.Build(Convert.ToInt32(wheels));

@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FactoryMethod", "FactoryMet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryPattern", "FactoryPattern\src\FactoryPattern.csproj", "{D617D319-2570-4A1E-AF49-01C65086EA06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleGame", "VehicleGame\VehicleGame.csproj", "{53973302-947F-44B3-8E0A-64FB6D8AD469}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleGame", "FactoryPattern\src\VehicleGame\VehicleGame.csproj", "{53973302-947F-44B3-8E0A-64FB6D8AD469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
