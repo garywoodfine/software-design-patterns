@@ -1,4 +1,4 @@
-#Factory Method Design Pattern
+# Factory Method Design Pattern
 
 The factory concept is probably the most common design patterns and recurs throughout the object-oriented programming.
 You will find countless references and uses of the factory pattern within the [.net core foundational libraries](https://github.com/dotnet/corefx) and throughout the .net framework source code, most notable and probably one of the most commonly used factories can be found in the `System.Data.Common` namespace  and the `DbProviderFactories`.
@@ -17,7 +17,7 @@ The pattern does not actually have a decision point where one subclass is direct
 
 
 
-##When to use a Factory Method
+## When to use a Factory Method
  The are a number of circumstances when developing an application when making use of the Factory Method is suitable. These situation include :
  * A class can't anticipate which class objects it must create
  * A class uses its subclasses to specify which objects it creates
@@ -27,7 +27,7 @@ It is generally considered a bad idea for base classes to know implementation de
 
 A Typical situation maybe  when a constructor needs to return an instance of type within which it resides, a factory method is able to return many different types of objects, all which belong to the same inheritance hierarchy.
 
-##How to implement Factory Pattern
+## How to implement Factory Pattern
 We'll develop a factory method that enables the creation of a vehicle depending on the number of wheels required
 
 ![factory pattern](https://garywoodfine.com/wp-content/uploads/2018/10/factory-pattern.jpg)
@@ -220,7 +220,7 @@ namespace Threenine.Map
 
 ```
 
-###Conclusion
+### Conclusion
 The Factory Method pattern, in my opinion is one of the most important patterns to understand within software development. It's the one pattern that in all likelihood that you'll most often implement. factory design pattern, is used to instantiate objects based on another data type. Factories are often used to reduce code bloat and make it easier to modify which objects need to be created.
 
  
