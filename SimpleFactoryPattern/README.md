@@ -1,5 +1,7 @@
 
-The post [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) appeared first on [Gary Woodfine](https://garywoodfine.com).
+# Simple Factory Pattern
+
+The post [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) appeared first on [Gary Woodfine](https://garywoodfine.com) and is also available on [Dev.to](https://dev.to/gary_woodfine/simple-factory-pattern-in-c-and-net-core-3263).
 
 In software development, a Software Design Pattern is a reusable solution to commonly recurring problems. A software design pattern is a description or template used to solve a problem that can be used in many different situations.
 
@@ -46,7 +48,7 @@ public class UserName
 
 We can develop two very simple derived classes that implement the abstract class and split the username into two parts in the constructor.  In this example we'll base the class on the assumption that the username is separated by a space, when we need to use the `FirstName` first scenario
 
-```csharp
+```c#
 
 public class FirstNameFirst : UserName
     {
@@ -65,7 +67,7 @@ public class FirstNameFirst : UserName
 
 In the second class, we'll base it on the assumption that the name is split by a comma.
 
-```csharp
+```c#
 
 public class LastNameFirst : UserName
     {
@@ -86,7 +88,7 @@ public class LastNameFirst : UserName
 
 We'll build a Simple Factory which simply tests for the existence of comma and then return an instance of one class or the other.
 
-```csharp
+```c#
 public class UsernameFactory
     {
         public UserName GetUserName(string name)
@@ -104,7 +106,7 @@ public class UsernameFactory
 
 We can now simply test our factory pattern using xUnit unit testing framework as follows.
 
-```csharp
+```c#
 public class UsernameFactoryTests
     {
         private UsernameFactory _factory;
@@ -158,4 +160,4 @@ That is the fundamental principle of the Simple Factory Pattern, to create an ab
 
 This approach helps to keep issues of data dependence separated from the classes' useful methods.
 
-The post [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) appeared first on [Gary Woodfine](https://garywoodfine.com).
+The post [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) appeared first on [Gary Woodfine](https://garywoodfine.com) and is also available on [Dev.to](https://dev.to/gary_woodfine/simple-factory-pattern-in-c-and-net-core-3263)..
