@@ -7,3 +7,6 @@ The pattern is useful for encapsulating and abstracting the creation of objects.
 Whenever an object can be configured in multiple ways across multiple dimensions, the Builder Pattern can simplify the creation of objects and clarify the intent. 
 
 ![Builder Pattern](https://garywoodfine.com/wp-content/uploads/2018/11/BuilderPattern.png)
+
+Let's explore the Builder Pattern and how developers can use it to construct objects from components.  You may already seen that the [Factory Pattern](https://garywoodfine.com/factory-method-design-pattern/) returns one of several different subclasses, depending on the data passed in arguments to creation methods.
+We'll now learn that the Builder Pattern assembles a number of objects in various ways depending on the data.
