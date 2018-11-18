@@ -155,13 +155,38 @@ Our actual implementation of our class abstract factory class, would possibly lo
         }
     }
 ```
-Our implementation  of our Vehicle Factory class, in truth is probably  considered bad coding practice,  are nothing more than **Pass Through Methods**  , but I have intentionally implemented this to illustrate a point that ultimately our methods will more than likely invoke an alternate factory to instantiate an object.
+Our implementation  of our Vehicle Factory class, in truth is probably  considered bad coding practice,  are nothing more than **Pass Through Methods**  , but I have intentionally implemented this to illustrate a point that ultimately our methods will more than likely invoke an alternate factory. 
 
 > A Pass Through Method is one that does little except invoke another method, whose signature is similar or identical to that of the calling method.
 >This typically denotes there is not a clean division between classes
 >
 >--- [John Ousterhout - A Philosophy of Software Design](https://garywoodfine.com/philosophy-of-software-design/) 
 
+If we take a look at an implementation of one of the factories  i.e `CycleFactory` you'll notice that I have actually elected to make use of the [Factory Method Pattern](https://garywoodfine.com/factory-method-design-pattern/) to create an instance of an object to return.  I chose this to labour another point, in that as a developer you can use these patterns interchangeably and coincide with other patterns.
 
+```c#
+ public class Cyclefactory : IVehicleFactory
+    {
+        public IVehicle Create(VehicleRequirements requirements)
+        {
+            switch (requirements.Passengers)
+            {
+                case 1:
+                    if(requirements.NumberOfWheels == 1) return new Unicycle();
+                    return new Bicycle();
+                case 2:
+                    return new Tandem();
+                case 3:
+                    return new Tricyle();
+                case 4:
+                    if (requirements.HasCargo) return new GoKart();
+                    return new FamilyBike();
+                default:
+                    return new Bicycle();
+            }
+       }
+    }
+```
+This also serves as an emphasis on the notion of **Factory of Factories** concept. 
 
 
