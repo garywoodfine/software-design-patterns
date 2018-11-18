@@ -13,6 +13,21 @@ namespace AbstractFactory
     {
         
     }
+
+    public class Tricyle : IVehicle
+    {
+        
+    }
+
+    public class FamilyBike : IVehicle
+    {
+        
+    }
+
+    public class GoKart : IVehicle
+    {
+        
+    }
     
     
     
