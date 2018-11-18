@@ -84,8 +84,7 @@ namespace VehicleGame
  
            return factory
                 .CycleFactory().Create(requirements);
-
-         
+        
         }
     }
 }

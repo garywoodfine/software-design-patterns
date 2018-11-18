@@ -9,7 +9,7 @@ namespace AbstractFactory
 
         public override IVehicleFactory MotorVehicleFactory()
         {
-            return new MotorCarFactory();
+            return new MotorVehicleFactory();
         }
     }
 }

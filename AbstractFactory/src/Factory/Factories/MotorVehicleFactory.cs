@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace AbstractFactory
 {
-    public class MotorCarFactory : IVehicleFactory
+    public class MotorVehicleFactory : IVehicleFactory
     {
         public IVehicle Create(VehicleRequirements requirements)
         {

@@ -104,28 +104,26 @@ The code in this section despite being quite messy at this point, and pretty har
 The `GetVehicle`  Method will return an instance of class which implements our `IVehicle` intefacce.
 
 ```c#
-private static IVehicle GetVehicle(VehicleRequirements requirements)
+ private static IVehicle GetVehicle(VehicleRequirements requirements)
         {
             var factory = new VehicleFactory();
             IVehicle vehicle;
 
-
-            switch (requirements.NumberOfWheels)
+            if (requirements.HasEngine)
             {
-                case 1:
-                case 2:
-                case 3:
-                  vehicle = factory.CycleFactory().Create(requirements);
-                  break;
-                default:
-                    vehicle = factory.MotorVehicleFactory().Create(requirements);
-                    break;
+                return factory.MotorVehicleFactory().Create(requirements);
             }
-
-            return vehicle;
+ 
+           return factory
+                .CycleFactory().Create(requirements);
+        
         }
 ```
 This is the method where we actually start to see the implementation of our Abstract Factory - or our *factory of factories*.  
+
+In this contrived example, our method is going to do a check to see, if the type of vehicle we want to build has an engine or not and based on that data it will select whether we want to create a Motor powered vehicle or Pedal powered vehicle and redirect to appropriate factory to create the vehicle.  Ideally, you'd probably defer this choice the Abstract factory itself, but I just wanted to illustrate the point, that using an abstract factory class we can still make decisions on which factory we wanted to use. 
+
+Both of the methods defined on the abstract class will provide us with an object implementing `IVehicle` interface.  The application doesn't control the ultimate end type of object but it can select which factory it wants to build the object based on certain criteria.
 
 Our abstract factory is actually an `abstract` class which is defined with 2 methods which require the implementation of 2 additional factories. You'll notice that these two methods are also just implementations of `IVehicleFactory`.
 
@@ -139,4 +137,31 @@ Our abstract factory is actually an `abstract` class which is defined with 2 met
 ```
 This class is nothing more than an abstract class and has no implementation code at all. We  could if desired have some default implementation code which could be overidden if desired. However, for my purpose I have just left them as stubs.
 
-The class enables the implementation of two different factories, each will be responsible for returning different vehicle types. In our Case Cycles or Motor Vehicles.
+The class enables the implementation of two different factories, each will be responsible for returning different vehicle types. In our Case Cycles or Motor Vehicles. 
+
+Our actual implementation of our class abstract factory class, would possibly look something like the following.
+
+```c#
+ public class VehicleFactory : AbstractVehicleFactory
+    {
+        public override IVehicleFactory CycleFactory()
+        {
+           return new Cyclefactory(); 
+        }
+
+        public override IVehicleFactory MotorVehicleFactory()
+        {
+            return new MotorVehicleFactory();
+        }
+    }
+```
+Our implementation  of our Vehicle Factory class, in truth is probably  considered bad coding practice,  are nothing more than **Pass Through Methods**  , but I have intentionally implemented this to illustrate a point that ultimately our methods will more than likely invoke an alternate factory to instantiate an object.
+
+> A Pass Through Method is one that does little except invoke another method, whose signature is similar or identical to that of the calling method.
+>This typically denotes there is not a clean division between classes
+>
+>--- [John Ousterhout - A Philosophy of Software Design](https://garywoodfine.com/philosophy-of-software-design/) 
+
+
+
+
