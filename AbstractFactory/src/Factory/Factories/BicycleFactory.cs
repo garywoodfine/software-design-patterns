@@ -14,16 +14,8 @@ namespace AbstractFactory
                 case 3:
                     return new Tricyle();
                 case 4:
-
-                    if (!requirements.Cargo)
-                    {
-                        return new FamilyBike();
-                    }
-                    else
-                    {
-                        return new GoKart();
-                    }
-
+                    if (requirements.HasCargo) return new GoKart();
+                    return new FamilyBike();
                 default:
                     return new Bicycle();
             }

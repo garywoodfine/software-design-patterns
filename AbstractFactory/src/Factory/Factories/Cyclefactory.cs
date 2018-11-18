@@ -4,8 +4,7 @@ namespace AbstractFactory
     {
         public IVehicle Create(VehicleRequirements requirements)
         {
-         
-            return requirements.Engine ? new MotorBikeFactory().Create(requirements) : new BicycleFactory().Create(requirements);
+          return new BicycleFactory().Create(requirements);
        }
     }
 }

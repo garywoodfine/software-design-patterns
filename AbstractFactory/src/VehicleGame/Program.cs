@@ -25,16 +25,16 @@ namespace VehicleGame
             
             Console.WriteLine("Do you have an engine ( Y/n )");
             var engine = Console.ReadLine();
-            switch (engine)
+            switch (engine.ToLower())
             {
-                case "Y":
-                    requirements.Engine = true;
+                case "y":
+                    requirements.HasEngine = true;
                     break;
-                case "N":
-                    requirements.Engine = false;
+                case "n":
+                    requirements.HasEngine = false;
                     break;
                 default:
-                    requirements.Engine = false;
+                    requirements.HasEngine = false;
                     break;
             }
             
@@ -54,16 +54,16 @@ namespace VehicleGame
             Console.WriteLine("Will you be carrying cargo");
 
             var cargo = Console.ReadLine();
-            switch (cargo)
+            switch (cargo.ToLower())
             {
-                case "Y":
-                    requirements.Engine = true;
+                case "y":
+                    requirements.HasEngine = true;
                     break;
-                case "N":
-                    requirements.Engine = false;
+                case "n":
+                    requirements.HasEngine = false;
                     break;
                 default:
-                    requirements.Engine = false;
+                    requirements.HasEngine = false;
                     break;
             }
 
@@ -77,20 +77,15 @@ namespace VehicleGame
             var factory = new VehicleFactory();
             IVehicle vehicle;
 
-
-            switch (requirements.NumberOfWheels)
+            if (requirements.HasEngine)
             {
-                case 1:
-                case 2:
-                case 3:
-                  vehicle = factory.CycleFactory().Create(requirements);
-                  break;
-                default:
-                    vehicle = factory.MotorVehicleFactory().Create(requirements);
-                    break;
+                return factory.MotorVehicleFactory().Create(requirements);
             }
+ 
+           return factory
+                .CycleFactory().Create(requirements);
 
-            return vehicle;
+         
         }
     }
 }

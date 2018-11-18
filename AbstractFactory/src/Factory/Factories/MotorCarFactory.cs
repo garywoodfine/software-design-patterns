@@ -6,7 +6,9 @@ namespace AbstractFactory
     {
         public IVehicle Create(VehicleRequirements requirements)
         {
-            if (!requirements.Cargo && requirements.NumberOfWheels == 4)
+            if(requirements.NumberOfWheels <= 3) return new MotorBikeFactory().Create(requirements);
+            
+            if (!requirements.HasCargo && requirements.NumberOfWheels == 4)
             {
                 if (requirements.Passengers >= 4)
                 {
@@ -20,7 +22,7 @@ namespace AbstractFactory
                 
             }
 
-            if (requirements.Cargo && requirements.NumberOfWheels == 4)
+            if (requirements.HasCargo && requirements.NumberOfWheels == 4)
             {
                 return new Van();
             }
