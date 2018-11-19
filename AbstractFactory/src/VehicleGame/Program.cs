@@ -74,17 +74,8 @@ namespace VehicleGame
 
         private static IVehicle GetVehicle(VehicleRequirements requirements)
         {
-            var factory = new VehicleFactory();
-            IVehicle vehicle;
-
-            if (requirements.HasEngine)
-            {
-                return factory.MotorVehicleFactory().Create(requirements);
-            }
- 
-           return factory
-                .CycleFactory().Create(requirements);
-        
+            var factory = new VehicleFactory(requirements);
+            return factory.Create();
         }
     }
 }

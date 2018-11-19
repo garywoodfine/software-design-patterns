@@ -2,14 +2,18 @@ namespace AbstractFactory
 {
     public class VehicleFactory : AbstractVehicleFactory
     {
-        public override IVehicleFactory CycleFactory()
+        private readonly IVehicleFactory _factory;
+        private readonly VehicleRequirements _requirements;
+        
+        public VehicleFactory(VehicleRequirements requirements)
         {
-           return new Cyclefactory(); 
-        }
+            _factory = requirements.HasEngine  ? (IVehicleFactory) new MotorVehicleFactory() : new Cyclefactory();
+            _requirements = requirements;
 
-        public override IVehicleFactory MotorVehicleFactory()
+        }
+        public override IVehicle Create()
         {
-            return new MotorVehicleFactory();
+           return _factory.Create(_requirements);
         }
     }
 }
