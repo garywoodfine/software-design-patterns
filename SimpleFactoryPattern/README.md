@@ -161,3 +161,6 @@ That is the fundamental principle of the Simple Factory Pattern, to create an ab
 This approach helps to keep issues of data dependence separated from the classes' useful methods.
 
 The post [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) appeared first on [Gary Woodfine](https://garywoodfine.com) and is also available on [Dev.to](https://dev.to/gary_woodfine/simple-factory-pattern-in-c-and-net-core-3263)..
+
+## Sponsored by 
+[![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)

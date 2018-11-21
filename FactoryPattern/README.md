@@ -223,6 +223,9 @@ namespace Threenine.Map
 ### Conclusion
 The Factory Method pattern, in my opinion is one of the most important patterns to understand within software development. It's the one pattern that in all likelihood that you'll most often implement. factory design pattern, is used to instantiate objects based on another data type. Factories are often used to reduce code bloat and make it easier to modify which objects need to be created.
 
+## Sponsored by 
+[![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)
+
  
 
 

@@ -18,9 +18,11 @@ Software Design patterns are typically categorised into three groups.
 
 |Creational Patterns  |  |
 | ----------| ---------------------------------- |
-| [Simple Factory Pattern](https://garywoodfine.com/simple-factory-pattern/) |interfaces for creating objects without exposing the object creation logic  || Abstract Factory |Creates an instance of several families of classes  | 
+| [Simple Factory](https://garywoodfine.com/simple-factory-pattern/) |interfaces for creating objects without exposing the object creation logic  |
+ [Factory Method](https://garywoodfine.com/factory-method-design-pattern/) |	Creates an instance of several derived classes  |
+| [Abstract Factory](https://garywoodfine.com/abstract-factory-design-pattern/) |Creates an instance of several families of classes  | 
 |Builder |Separates object construction from its representation  | 
-|[Factory Method](https://garywoodfine.com/factory-method-design-pattern/) |	Creates an instance of several derived classes  | 
+| 
 | Prototype |A fully initialized instance to be copied or cloned  | 
 | Singleton |	A class of which only a single instance can exist  | 
 ---------------------------------------------------------------------------------
@@ -54,4 +56,5 @@ Software Design patterns are typically categorised into three groups.
 |Visitor|	Defines a new operation to a class without change|
 
 -----------------------------------------------------------------------------------
-
+## Sponsored by 
+[![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)

@@ -260,6 +260,8 @@ The Abstract Factory pattern enables developers to generically define families o
 
  The Abstract Factory pattern is pretty common in C#, and the .net Framework has libraries that use it to provide a way to extend and customize their standard components.
  
+ ## Sponsored by 
+ [![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)
  
  
 
