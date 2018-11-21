@@ -245,6 +245,7 @@ The complexity of clients `GetVehicle` method has greatly been reduced, they now
 What we have achieved here, is an important aspect of *Abstractions* 
 
 > An Abstraction is a simplified view of an entity, which omits unimportant details.
+>
 >--- [John Ousterhout - A Philosophy of Software Design](https://garywoodfine.com/philosophy-of-software-design/) 
 
 We have managed to [Pull Complexity Downwards](https://garywoodfine.com/philosophy-of-software-design#complexity) and shielded our users from complexity providing them with an easy to use interface.
