@@ -254,6 +254,15 @@ We have managed to [Pull Complexity Downwards](https://garywoodfine.com/philosop
 >
 >--- [John Ousterhout - A Philosophy of Software Design](https://garywoodfine.com/philosophy-of-software-design/) 
 
+### Consequences of Abstract Factory
+
+The main purpose of the Abstract Factory Pattern is to isolate concrete classes created. The actual class names of the classes are hidden in the factory and need not to be known at the client level at all.
+
+Due to the isolation of classes, developers can change or interchange these product class families as desired. Since only one instance type of concrete classes can be generated, this keeps developers cannot inadvertently create classes of different class families. However, the pattern does incur additional effort to add new class families since there is a need to define new, unambiguous conditions to create new classes.
+
+Despite all the classes that Abstract Factory generates inheriting the same base class or interface, there is nothing to prevent developers adding additional methods or have differing implementation logic.  This presents problems when using any sub-class because you cannot ensure if your sub-class has the same methods available.
+
+ To solve this problem, you can ensure that all classes only implement methods defined on a common interface or inherit the abstract class.
 
 
 ### Conclusion
