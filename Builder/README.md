@@ -169,6 +169,43 @@ public override string ToString()=>
  the `Build` or `Create` to define the method that will return your object, but you don't really need to rather you 
  could opt for another name, in the case of StringBuilder it is `ToString()` 
  
+ ### More complex Builder Pattern implementation
+ 
+ In the above example we have implemented a simple builder patter, however it probably isn't easy to determine why this 
+ actually provides any benefit to developers. After all,from this simple implementation you might be thinking but surely
+ we could just a simply use C# object initialisation and get exactly the result.
+ 
+ ```c#
+ var person2 = new Person
+             {
+                 Id = 10,
+                 Firstname = "Gary",
+                 Lastname = "Woodfine",
+                 DateOfBirth = DateTime.Now,
+                 Occupation = "Freelance Full Stack Developer",
+                 Gender = Gender.Male
+             };
+  
+ ```
+ There seems to be no need for the additional complexity in introducing the Builder Pattern.   
+ 
+ The standard definition the Builder pattern separates the construction of a complex object from its representation so 
+ that the same construction process can create different representations.
+ 
+ The Builder pattern provides step-by-step creation of a complex object so that the same construction process can 
+ create different representations is the routine in the builder pattern that also makes for finer control over the 
+ construction process. All the different builders generally inherit from an abstract builder class that declares the g
+ eneral functions to be used by the director to let the builder create the product in parts.
+ 
+ Builder has a similar motivation to the abstract factory but, whereas in that pattern, the client uses the 
+ abstract factory class methods to create its own object, in Builder the client instructs the builder class on how to 
+ create the object and then asks it for the result. How the class is put together is up to the Builder class. It's a 
+ subtle difference.
+ 
+ The Builder pattern is applicable when the algorithm for creating a complex object should be independent of the parts 
+ that make up the object and how they are assembled and the construction process must allow different representations 
+ for the object thats constructed
+  
 ### Summary
  
  We examined the Builder Pattern and seen how useful it is too create complex objects.  We also looked at an example

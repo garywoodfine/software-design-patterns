@@ -21,7 +21,7 @@ namespace BuilderPattern
          new StringBuilder()
             .Append("Person with id: ")
             .Append(Id.ToString())
-            .Append("with date of birth ")
+            .Append(" with date of birth ")
             .Append(DateOfBirth.ToLongDateString())
             .Append(" and name ")
             .Append(Firstname)
