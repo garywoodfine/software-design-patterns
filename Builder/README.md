@@ -187,8 +187,6 @@ public override string ToString()=>
              };
   
  ```
- There seems to be no need for the additional complexity in introducing the Builder Pattern.   
- 
  The standard definition the Builder pattern separates the construction of a complex object from its representation so 
  that the same construction process can create different representations.
  
@@ -197,14 +195,14 @@ public override string ToString()=>
  construction process. All the different builders generally inherit from an abstract builder class that declares the g
  eneral functions to be used by the director to let the builder create the product in parts.
  
- Builder has a similar motivation to the abstract factory but, whereas in that pattern, the client uses the 
+ Builder has a similar motivation to the [abstract factory](https://garywoodfine.com/abstract-factory-design-pattern/) but, whereas in that pattern, the client uses the 
  abstract factory class methods to create its own object, in Builder the client instructs the builder class on how to 
  create the object and then asks it for the result. How the class is put together is up to the Builder class. It's a 
  subtle difference.
  
  The Builder pattern is applicable when the algorithm for creating a complex object should be independent of the parts 
  that make up the object and how they are assembled and the construction process must allow different representations 
- for the object thats constructed
+ for the object constructed
   
 ### Summary
  
