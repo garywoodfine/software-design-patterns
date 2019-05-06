@@ -4,30 +4,26 @@ namespace BuilderPattern
 {
     public class PersonBuilder
     {
-        private readonly Person _person;
+        private Person _person;
 
         public PersonBuilder()
         {
+
+        }
+
+        public PersonBuilder Create(string firstName, string lastName)
+        {
             _person = new Person();
-        }
-
-        public PersonBuilder Id(int id)
-        {
-            _person.Id = id;
-            return this;
-        }
-
-        public PersonBuilder Firstname(string firstName)
-        {
             _person.Firstname = firstName;
+            _person.Lastname = lastName;
+            _person.Id = Guid.NewGuid();
             return this;
+
         }
 
-        public PersonBuilder Lastname(string lastname)
-        {
-            _person.Lastname = lastname;
-            return this;
-        }
+       
+       
+       
 
         public PersonBuilder DateOfBirth( DateTime dob)
         {

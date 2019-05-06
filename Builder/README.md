@@ -169,7 +169,7 @@ public override string ToString()=>
  the `Build` or `Create` to define the method that will return your object, but you don't really need to rather you 
  could opt for another name, in the case of StringBuilder it is `ToString()` 
  
- ### More complex Builder Pattern implementation
+ ### Fluent Builder Pattern implementation
  
  In the above example we have implemented a simple builder patter, however it probably isn't easy to determine why this 
  actually provides any benefit to developers. After all,from this simple implementation you might be thinking but surely
@@ -202,7 +202,30 @@ public override string ToString()=>
  
  The Builder pattern is applicable when the algorithm for creating a complex object should be independent of the parts 
  that make up the object and how they are assembled and the construction process must allow different representations 
- for the object constructed
+ for the object constructed.
+ 
+ If we consider a person object and think of all the different variations we could expect to create a person object. 
+ For instance, how do we deal with married woman? Considering in some cases we may need to take into consideration her
+ maiden name.  How do we cater for trans-gender people?  It soon becomes clear that there are all manner of rules and 
+ variations we need to consider when build a person object.  All manner of varying combinations and all sorts of 
+ additional properties we will need to include. Rules that may not be easy or convenient to incorporate in object
+ initialisation.
+ 
+ In our first implementation of builder for a fluent interface of the Person class, we implemented the builder with no 
+ strings attached. We have not enforced rules for the order of assignment. 
+ 
+ The code is simple and easy to understand but it does leave the builder class open to misuse. We can implement the 
+ basic expression builder with method chaining in C# .NET.
+ 
+ We're going to refactor our builder slightly to incorporate a new method `Create` which will accept Firstname and 
+ Lastname argument but more importantly we are going to remove the creation of the `Person` class from the constructor
+ and into `Create` method.
+ 
+ It also doesn't make much sense providing and Id to an object on creation, it is highly likely that a new Id should be
+ created when the object is created. So we'll also remove the Id parameter from the Builder.
+ 
+ 
+  
   
 ### Summary
  
