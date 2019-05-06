@@ -224,8 +224,59 @@ public override string ToString()=>
  It also doesn't make much sense providing and Id to an object on creation, it is highly likely that a new Id should be
  created when the object is created. So we'll also remove the Id parameter from the Builder.
  
- 
+ Implementing a fluent interface is a relatively straight-forward task that can be done through the use of 
+ method chaining. Method chaining is simply a set of assignment methods that return itself.   The result from each 
+ method can then call the next assignment method, and so-on. 
   
+  To guide the user and enforce rules of construction (such as, the Class can only be assigned once, 
+  followed by attributes), we utilize progressive interfaces. Where the method would return “this”, we instead return 
+  an interface for the next step in line.
+  
+  ```c#
+   public class PersonBuilder
+      {
+          private Person _person;
+  
+         public PersonBuilder Create(string firstName, string lastName)
+          {
+              _person = new Person();
+              _person.Firstname = firstName;
+              _person.Lastname = lastName;
+              _person.Id = Guid.NewGuid();
+              return this;
+  
+          }
+          public PersonBuilder DateOfBirth( DateTime dob)
+          {
+              _person.DateOfBirth = dob;
+              return this;
+          }
+  
+          public PersonBuilder Gender(Gender gender)
+          {
+              _person.Gender = gender;
+              return this;
+          }
+  
+          public PersonBuilder Occupation(string occupation)
+          {
+              _person.Occupation = occupation;
+              return this;
+          }
+          
+          public Person Build()
+          {
+              return _person;
+          }
+      }
+  
+  ```
+  
+  we’ve implemented the Expression Builder pattern using method chaining. The class itself constructs a Person 
+  for us. We may then call any of the assignment methods to populate the fields and attributes of the Character class. 
+  Each method returns a copy of itself, allowing us to chain the assignment methods, one after the other, 
+  thus implementing our fluent interface in C# .NET. We can then finally call the `Build()` method to obtain the 
+  completed Person class.
   
 ### Summary
  

@@ -6,12 +6,7 @@ namespace BuilderPattern
     {
         private Person _person;
 
-        public PersonBuilder()
-        {
-
-        }
-
-        public PersonBuilder Create(string firstName, string lastName)
+       public PersonBuilder Create(string firstName, string lastName)
         {
             _person = new Person();
             _person.Firstname = firstName;
@@ -20,11 +15,6 @@ namespace BuilderPattern
             return this;
 
         }
-
-       
-       
-       
-
         public PersonBuilder DateOfBirth( DateTime dob)
         {
             _person.DateOfBirth = dob;
