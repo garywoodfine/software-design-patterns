@@ -169,7 +169,7 @@ public override string ToString()=>
  the `Build` or `Create` to define the method that will return your object, but you don't really need to rather you 
  could opt for another name, in the case of StringBuilder it is `ToString()` 
  
- ### Fluent Builder Pattern implementation
+
  
  In the above example we have implemented a simple builder patter, however it probably isn't easy to determine why this 
  actually provides any benefit to developers. After all,from this simple implementation you might be thinking but surely
@@ -187,6 +187,21 @@ public override string ToString()=>
              };
   
  ```
+ The problem with this approach is that it is vry similar to passing arguments to a function, which inadvertently adds complexity to understanding the code.
+ 
+ >The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided when possible. More than three (polyadic) requires very special justification – and then shouldn’t be used anyway.
+ 
+ > [Uncle Bob - Clean Code](https://amzn.to/2PTO6ar)
+
+There will invariably be situations when instantiating objects that you will need to call a function to do something to provide a value to that object. i.e. Generate a new ID which may need calling out to function to get a newly created Id value etc.
+
+It is in situations like this that make the Builder pattern a much more viable option, and as defined in [Philosophy of Software Design](https://garywoodfine.com/philosophy-of-software-design/) we are able to pull complexity downwards.
+
+> When developing a module, look for opportunities to take a little bit of extra suffering upon yourself in order to reduce the suffering of your users.
+> John Ousterhout - [Philosophy of Software Design](https://amzn.to/2V8AHfC)
+ 
+  ### Fluent Builder Pattern implementation
+  
  The standard definition the Builder pattern separates the construction of a complex object from its representation so 
  that the same construction process can create different representations.
  
@@ -283,4 +298,8 @@ public override string ToString()=>
  We examined the Builder Pattern and seen how useful it is too create complex objects.  We also looked at an example
  how the .net core framework itself makes use of the builder pattern to provide common functionality string building 
  functionality.
+ 
+
+ ## Sponsored by 
+ [![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)
  
