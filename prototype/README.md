@@ -1,7 +1,7 @@
 # The Protoype Pattern C# .net core
 
 
-The Prototype Design Pattern is one of the _Creational Design Patterns_ defined by the so called Gang Of Four (GOF) published their book [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PwkRfA) in which they presented a catalog of simple and succinct solutions to commonly occurring design problems.
+The Prototype Design Pattern is one of the _Creational Design Patterns_ defined by the _Gang Of Four (GOF)_ published their book [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PwkRfA) in which they presented a catalog of simple and succinct solutions to commonly occurring design problems.
 
 The Prototype pattern is specifically used when creating a duplicate object of an existing object while attempting to conserve resources and focus on performance.
 
