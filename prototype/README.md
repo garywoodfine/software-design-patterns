@@ -61,7 +61,7 @@ We can now implement our basic client App to instantiate an initial Developer ob
             {
                 FirstName = "Gary",
                 Lastname = "Woodfine",
-                Skills = new []{"C#", "PHP", "SQL", "JavaScript"}
+                Skills = new List<string> {"C#", "PHP", "SQL", "JavaScript"}
             };
 
 
@@ -81,7 +81,6 @@ We can now implement our basic client App to instantiate an initial Developer ob
 ```
 If you run the application you'll notice that the Second instance of the Developer has all the same properties of the first one instantiated.
 
-Once your object is cloned you can do whatever you like with it. So for instance, if you want to add additional skills or change the Firstname and Lastname of your object, you can do so with affecting the initial instantiation of your Developer object.
 
 ## Applications for the Prototype Pattern in C#
 
@@ -104,7 +103,76 @@ The following are typical application scenarios where you may want to consider u
 * Enables adding and removing objects at run time.
 * Enables configuring application classes dynamically.
 
+The Prototype Pattern is another tool you can use when you can specify the general class needed in program but need to defer the exact class until execution time. It is similar to the [Builder Pattern](https://garywoodfine.com/the-builder-pattern-net-core/)  in that some class or method decides what components or details make up the final instantiated class. However, it differs in that the target classes are constructed by cloning one or more classes and then changing or filling in the details of the cloned class to behave as desired.
 
+Prototypes can be used whenever you need classes that differ only in the type of processing they offer.
+
+Any change you make in one clone of the object is immediately reflected in the other because in fact there is only one object.  
+
+To see this behaviour lets add some additional logic to our code, to add an additional skill to our Second Developer instance. After that lets print out our skills of our initial instance to the console.
+
+```c#
+ class Program
+    {
+        static void Main(string[] args)
+        {
+
+            var dev = new Developer
+            {
+                FirstName = "Gary",
+                Lastname = "Woodfine",
+                Skills = new List<string>{"C#", "PHP", "SQL", "JavaScript"}
+            };
+
+
+            var dev2 = dev.Clone() as Developer; 
+            
+            Console.WriteLine($"The Cloned  Developer name is { dev2.FirstName }  { dev2.Lastname }");
+            
+            Console.WriteLine("The second developer has the following skills: ");
+
+
+            foreach (var skill in dev2.Skills)
+            {
+                Console.WriteLine(skill);
+            }
+
+            // Add a new Skill to our Cloned Instance
+            dev2.Skills.Add( "VueJs");
+            
+            Console.WriteLine(" ");
+            
+
+            Console.WriteLine("Our Initial Developer object now has VueJS added too");
+            foreach (var skill in dev.Skills)
+            {
+                 Console.WriteLine(skill);
+            }
+            
+        }
+```
+If we run our sample we'll see that the `Vue.JS` has been added to our Developer instance skill set.
+
+```text
+The Cloned  Developer name is Gary  Woodfine
+The second developer has the following skills: 
+C#
+PHP
+SQL
+JavaScript
+ 
+Our Initial Developer object now has VueJS added too
+C#
+PHP
+SQL
+JavaScript
+VueJs
+
+``` 
+
+
+ ## Sponsored by 
+ [![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)
 
 
  

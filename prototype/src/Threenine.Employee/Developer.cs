@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Threenine.Employee
 {
@@ -6,7 +7,7 @@ namespace Threenine.Employee
     {
         public string FirstName { get; set; }
         public string Lastname { get; set; }
-        public string[] Skills { get; set; }
+        public List<string> Skills { get; set; }
         
         public object Clone()
         {

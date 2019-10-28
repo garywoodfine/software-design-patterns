@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Threenine.Employee;
 
 namespace Threenine.Client
@@ -12,7 +13,7 @@ namespace Threenine.Client
             {
                 FirstName = "Gary",
                 Lastname = "Woodfine",
-                Skills = new []{"C#", "PHP", "SQL", "JavaScript"}
+                Skills = new List<string>{"C#", "PHP", "SQL", "JavaScript"}
             };
 
 
@@ -27,6 +28,19 @@ namespace Threenine.Client
             {
                 Console.WriteLine(skill);
             }
+
+            // Add a new Skill to our Cloned Instance
+            dev2.Skills.Add( "VueJs");
+            
+            Console.WriteLine(" ");
+            
+
+            Console.WriteLine("Our Initial Developer object now has VueJS added too");
+            foreach (var skill in dev.Skills)
+            {
+                 Console.WriteLine(skill);
+            }
+            
         }
     }
 }
