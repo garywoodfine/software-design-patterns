@@ -23,7 +23,7 @@ The .net framework provides developers with the [ICloneable Interface](https://d
  >The ICloneable interface enables you to provide a customized implementation that creates a copy of an existing object. The ICloneable interface contains one member, the Clone method, which is intended to provide cloning support beyond that supplied by Object.MemberwiseClone.
 >
 
-The ICloneable interface simply requires that your implementation of the Clone() method return a copy of the current object instance.
+The ICloneable interface simply requires that your implementation of the `Clone()` method return a copy of the current object instance.
 
 The developer is free to choose any implementation to perform the clone operation i.e. Deep, Shallow or Custom copy of the object.
 
@@ -169,7 +169,9 @@ JavaScript
 VueJs
 
 ``` 
-
+### Summary
+ 
+ The prototype pattern copies or clones an existing class, rather than creating a new instance, when creating new instances is more expensive.
 
  ## Sponsored by 
  [![threenine logo](http://static.threenine.co.uk/img/github_footer.png)](https://threenine.co.uk/)
