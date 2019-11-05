@@ -1,6 +1,6 @@
 ﻿using System;
 using Threenine.Print;
-using Threenine.Print.Simple;
+using Threenine.Print.GenericLazy;
 
 namespace TestConsole
 {
@@ -8,10 +8,12 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-           
-            Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = "poo"});
-            
-            Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = "poo2"});
+            if (args == null) throw new ArgumentNullException(nameof(args));
+
+            for (int i = 0; i < 12; i++)
+            {
+                Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = $"test-document-{i}"});
+            }
 
           
             foreach (var queueItem in Spooler.Instance.Queue)

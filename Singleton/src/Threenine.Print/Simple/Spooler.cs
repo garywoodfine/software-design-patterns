@@ -11,7 +11,6 @@ namespace Threenine.Print.Simple
    {
        private static Spooler _instance;
    
-     
        public static Spooler Instance => _instance ??= new Spooler();
        
    }

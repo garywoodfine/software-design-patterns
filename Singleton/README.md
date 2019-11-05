@@ -2,7 +2,7 @@
 
 The Singleton pattern is grouped by the Gang Of Four in [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck) as a Creational Pattern, although to some extent it is a pattern that limits, rather than promotes, the creation of classes.
 
-The primary objective of the Singleton Pattern, is to ensure that there is one and only one instance of a class and provides a global access point to it.
+The primary objective of the Singleton Pattern, is to ensure that there is __one and only one__ instance of a class and provides a global access point to it.
 
 There are a number of instances in software development where one will need to ensure that there is only one instance of a class. One such example, which may be typical for enterprise software developers is to ensure there is a single point of access to a database engine.
 
@@ -47,6 +47,9 @@ The print spooler is a software service that manages the printing process. The s
 The simplest implementation of the Singleton Pattern is not thread safe, which may result in two different threads evaluate the instance value to `null` and actually create two instances of the object thus completely violating the core concept of the Singleton Pattern.
 
 ```c#
+
+  // This is not recommended implementation of the Singleton Pattern
+  // Just an example of the simplest implementation
   public sealed class Spooler
    {
        private static Spooler instance = null;
@@ -61,11 +64,14 @@ The simplest implementation of the Singleton Pattern is not thread safe, which m
 ```
  In the above example, it is possible for the instance to be created before the expression is evaluated, but the memory model doesn't guarantee that the new value of instance will be seen by other threads unless suitable memory barriers have been passed. 
  
+ In the line ` public static Spooler Instance => instance ??= new Spooler();`  We simply make use of the [null-coalescing operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator)  to check if our instance has been instantiated
+ and if not create it or return the existing instantiated object.
+ 
  In a simple single thread application model the example will work, but this is not an optimal implementation.
  
  In the following, example we'll create an `abstract` class which our Singleton class will extend, to basically add some features we can reuse throughout our further examples.
  
- We'll add a Spool class which just preforms a very rudimentary implementation of a print queue which will serve for a demo purposes.
+ We'll add a Spool class which just preforms a very rudimentary implementation of a print queue which will serve for a demo purposes. 
  
  ```c#
   public abstract class Spool
@@ -95,46 +101,57 @@ We'll also create a really simple console application to illustrate how we would
 
 ```c#
     class Program
-        {
-            static void Main(string[] args)
             {
-                int i = 1;
-                // We can just access the instance of the class then we can just access the methods 
-                // Available on the instance.
-                Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = $"Test{i}.docx"});
-                Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = $"Test{i + 1}.docx"});
-                
-                    foreach (var doc in Spooler.Instance.Queue)
+                static void Main(string[] args)
+                {
+                    if (args == null) throw new ArgumentNullException(nameof(args));
+        
+                    for (int i = 0; i < 12; i++)
                     {
-                        Console.WriteLine(doc.DocumentName);
+                        Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = $"test-document-{i}"});
                     }
-               
+        
+                  
+                    foreach (var queueItem in Spooler.Instance.Queue)
+                    {
+                        Console.WriteLine(queueItem.DocumentName);
+                    }
+                }
             }
-        }
 ```
-If we run a simple application we'll see that our application works as expected and there is only one instance of `Spooler` class and we can add values to it no problem.
+If we run a simple application we'll see that our application works as expected and there is only one instance of `Spooler` class and we can add values to it no problem. Interesting point to note here, is that because our Singleton class
+returns a reference to itself in the instance, we can then just use it in Fluent style i.e. we don't need to create a variable to reference to it.
 
 The problem comes in when we try to use this class in a Multi-Threaded environment. Which I will try to simulate by creating a load of tasks which start a new thread and attempts to add a document to our `Queue` 
 
+### Simple Thread Safe Singletom Implementation
+We could improve the above implementation by making use of a `lock`  on the shared object to check if the instance has been created before creating a new one.
+
+Locking ensures that all reads occur logically after the lock is acquired while unlocking ensures all writes occur logically before the lock release. This ensures only one thread can create an instance 
+
+This pattern may address the memory barrier issues, faced with the Simple Implementation, but unfortunately has a performance impact because a lock is acquired every time the instance is requested.
+
 ```c#
-     static void Main(string[] args)
-     {
-            for (var i = 0; i < 5; i++)
+     public sealed class Spooler : Spool
+         {
+            private static Spooler instance;
+            private static readonly object threadlock = new object();
+        
+            
+            public static Spooler Instance
             {
-                var spool = Task.Factory.StartNew(() =>
-                    Spooler.Instance.Queue.Add(new PrintQueueItem {DocumentName = $"Test{i}.docx"}));
+                get
+                {
+                    lock (threadlock)
+                    {
+                        return instance ??= new Spooler();
+                    }
+                }
             }
-           
-            foreach (var doc in Spooler.Instance.Queue)
-            {
-                Console.WriteLine(doc.DocumentName);
-            }
-     }
+        } 
 
 ```
-
-If we run this code you'll see nothing actually gets added to the queue and nothing actually is printed out!
-
+### 
 
 
 
