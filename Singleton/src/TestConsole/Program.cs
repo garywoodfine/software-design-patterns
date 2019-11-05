@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Threenine.Print;
 using Threenine.Print.GenericLazy;
 
@@ -14,7 +13,6 @@ namespace TestConsole
             for (int i = 0; i < 12; i++)
             {
                 Spooler.Instance.Queue.Add(new PrintQueueItem{ DocumentName = $"test-document-{i}"});
-               
             }
 
           
