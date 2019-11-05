@@ -23,7 +23,7 @@ Software Design patterns are typically categorised into three groups.
 | [Abstract Factory](https://garywoodfine.com/abstract-factory-design-pattern/) |Creates an instance of several families of classes  | 
 |[Builder](https://garywoodfine.com/the-builder-pattern-net-core/) |Separates object construction from its representation  | 
 | [Prototype](https://garywoodfine.com/the-prototype-design-pattern-c-net-core/) |A fully initialized instance to be copied or cloned  | 
-| Singleton |	A class of which only a single instance can exist  | 
+| [Singleton](https://garywoodfine.com/singleton-design-pattern-c-net-core/) |	A class of which only a single instance can exist  | 
 ---------------------------------------------------------------------------------
 
 
