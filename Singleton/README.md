@@ -267,6 +267,23 @@ The code below implicitly uses `LazyThreadSafetyMode.ExecutionAndPublication` as
 
 
 
+#### Example Scenarios for Singleton Classes
+
+Singleton classes are typically used in applications to create utility classes. A utility classes typically have the following characteristics
+* Have no state  of its own
+* All the methods can be class methods (static) rather than object methods
+* Provide methods for multiple other classes i.e. Common or shared code
+
+Other common usages for Singleton classes could be:
+
+* **Service Proxies:**   invoking a service or API is an expensive operation. Creating Service proxy as a Singleton this overhead can be reduced.
+* **Facades:** Database connections are another example where Singleton can be used to improve performance and synchronization.
+**Logging:**  I/O is resource consuming operation, having a single instance of a Logger, data can be persisted to log files.
+* **Data sharing:** Configuration values and constant values can be kept in Singleton to read by other components of the application.
+* **Caching:**  Data fetching is a time consuming process whereas caching required data in the application memory avoids DB calls and Singleton can be used to handle the caching with thread synchronization.
+
+
+### Exception Handling
 
 
 
