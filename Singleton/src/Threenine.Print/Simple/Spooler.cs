@@ -9,10 +9,10 @@ namespace Threenine.Print.Simple
     /// </summary>
    public sealed class Spooler : Spool
    {
-       private static Spooler instance;
+       private static Spooler _instance;
    
      
-       public static Spooler Instance => instance ??= new Spooler();
+       public static Spooler Instance => _instance ??= new Spooler();
        
    }
 }
