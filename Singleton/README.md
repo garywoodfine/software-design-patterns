@@ -41,6 +41,20 @@ The print spooler is a software service that manages the printing process. The s
  
  In the early days of personal computers, you had to wait until a document printed before you could do anything else. Thanks to modern print spoolers, the printing process has minimal impact on user productivity.
  
+ ### Processes and Threads
+ 
+ In order to understand the singleton pattern, it is important to understand the context in which it will operate. In the .Net Framework, an application will be composed of lightweight, managed sub-processes called application domains that can comprise one or more managed threads. 
+ For the purpose of understanding the singleton pattern, let's define this as a multithreaded application that contains one or more threads running simultaneously. Technically, the threads are actually not running simultaneously, but this is 
+ achieved by dividing the available processor time between the threads, so that each thread will execute for a small amount of time and then the thread will suspend activity, allowing for another thread to execute.
+ 
+ singleton pattern, in a multithreaded application, special care needs to be taken to ensure that access to the singleton is limited so that only one thread enters specific areas of logic at a time. Because of this synchronization of threads, 
+ it is possible for one thread to retrieve a value and update it, and, before it can be stored, another thread also updates the value.
+ 
+ To avoid data being updated incorrectly, restriction is required to prevent more than one thread from executing the same block of logic at the same time. There are several mechanisms supported in the .Net Framework and, 
+ in the singleton pattern.
+ 
+ We'll examine several Singleton Implementation patterns
+
  
 ## Simple Singleton Pattern 
 
@@ -123,6 +137,8 @@ If we run a simple application we'll see that our application works as expected 
 returns a reference to itself in the instance, we can then just use it in Fluent style i.e. we don't need to create a variable to reference to it.
 
 The problem comes in when we try to use this class in a Multi-Threaded environment. Which I will try to simulate by creating a load of tasks which start a new thread and attempts to add a document to our `Queue` 
+
+
 
 ### Simple Thread Safe Singleton Implementation
 We could improve the above implementation by making use of a `lock`  on the shared object to check if the instance has been created before creating a new one.
@@ -263,10 +279,6 @@ The code below implicitly uses `LazyThreadSafetyMode.ExecutionAndPublication` as
     }
 ``` 
 
-
-
-
-
 #### Example Scenarios for Singleton Classes
 
 Singleton classes are typically used in applications to create utility classes. A utility classes typically have the following characteristics
@@ -283,9 +295,10 @@ Other common usages for Singleton classes could be:
 * **Caching:**  Data fetching is a time consuming process whereas caching required data in the application memory avoids DB calls and Singleton can be used to handle the caching with thread synchronization.
 
 
-### Exception Handling
+The singleton pattern should only be used when necessary as it can introduce a potential bottleneck for the application. Sometimes, the pattern ii may be viewed as an anti-pattern because it could introduce `Global State`. 
 
-
+`Global state`, unknown dependencies within an application are introduced and it then becomes unclear as to how many types might depend on the information. Additionally, many frameworks and repositories already limit access 
+when required, so introducing an additional mechanism might limit the performance unnecessarily.
 
 
  
