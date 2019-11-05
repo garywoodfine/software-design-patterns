@@ -124,7 +124,7 @@ returns a reference to itself in the instance, we can then just use it in Fluent
 
 The problem comes in when we try to use this class in a Multi-Threaded environment. Which I will try to simulate by creating a load of tasks which start a new thread and attempts to add a document to our `Queue` 
 
-### Simple Thread Safe Singletom Implementation
+### Simple Thread Safe Singleton Implementation
 We could improve the above implementation by making use of a `lock`  on the shared object to check if the instance has been created before creating a new one.
 
 Locking ensures that all reads occur logically after the lock is acquired while unlocking ensures all writes occur logically before the lock release. This ensures only one thread can create an instance 
@@ -151,7 +151,119 @@ This pattern may address the memory barrier issues, faced with the Simple Implem
         } 
 
 ```
-### 
+###  Double check Lock Singleton Pattern
+
+We could attempt the issues above by implementing a Double check Lock pattern.
+
+This pattern is not recommended and has a number of issues.  
+
+```c#
+ public class Spooler : Spool
+    {
+      
+            private static Spooler instance;
+            private static readonly object padlock = new object();
+
+            public static Spooler Instance
+            {
+                get
+                {
+                    if (instance == null)
+                    {
+                        lock (padlock)
+                        {
+                            if (instance == null)
+                            {
+                                instance = new Spooler();
+                            }
+                        }
+                    }
+                    return instance;
+                }
+            }
+        }
+```
+
+### Almost Lazy Singleton Pattern
+
+`static` constructors in C# execute only when an instance of the class is created or a static member is referenced, and to execute only once per AppDomain. The check for the type being newly constructed needs to be executed whatever else happens, it will be faster than adding extra checking as in the previous examples.
+
+This approach is still not ideal and actually has some issues because if you have static members other than Instance, the first reference to those members will involve creating the instance.  There are also additional complications in that  if one static constructor invokes another which invokes the first again.  The laziness of type initializers are only guaranteed by .NET when the type isn't marked with a special flag called `beforefieldinit`. 
+
+This pattern also incurs a performance hit.
+
+```c#
+ public class Spooler : Spool
+    {
+        private static readonly Spooler instance = new Spooler();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static Spooler()
+        {
+        }
+
+        private Spooler()
+        {
+        }
+
+        public static Spooler Instance => instance;
+    }
+```
+### Full Lazy Implementation
+
+In this pattern instantiation is triggered by the first reference to the static member of the nested class, which only occurs in Instance. 
+
+```c#
+   public class Spooler : Spool
+    {
+        
+        private Spooler()
+        {
+        }
+
+        public static Spooler Instance { get { return Nested.instance; } }
+
+        private class Nested
+        {
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static Nested()
+            {
+            }
+
+            internal static readonly Spooler instance = new Spooler();
+        }
+        
+    }
+```
+
+### Generic Lazy Implementation
+
+The .net framework has some really cool features that and `System.Lazy<T>` is one of those features to help provide lazy initialization with access from multiple threads.
+
+The code below implicitly uses `LazyThreadSafetyMode.ExecutionAndPublication` as the thread safety mode for the `Lazy<Spooler>`.
+
+ simpler way to achieve laziness, using .NET 4 +, in my opinion tt also has the advantage that it's obviously lazy and it is clearly and implicitly stated in the code.
+
+```c#
+ public class Spooler : Spool
+    {
+        private static readonly Lazy<Spooler>
+            lazy =
+                new Lazy<Spooler>
+                    (() => new Spooler());
+
+        public static Spooler Instance { get { return lazy.Value; } }
+
+        private Spooler()
+        {
+        }
+        
+    }
+``` 
+
+
 
 
 
