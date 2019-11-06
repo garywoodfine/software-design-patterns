@@ -175,7 +175,7 @@ We could attempt the issues above by implementing a Double check Lock pattern.
 This pattern is not recommended and has a number of issues.  
 
 ```c#
- public class Spooler : Spool
+ public sealed class Spooler : Spool
     {
       
             private static Spooler instance;
@@ -244,7 +244,7 @@ This approach is still not ideal and actually has some issues because if you hav
 This pattern also incurs a performance hit.
 
 ```c#
- public class Spooler : Spool
+ public sealed class Spooler : Spool
     {
         private static readonly Spooler instance = new Spooler();
 
@@ -266,7 +266,7 @@ This pattern also incurs a performance hit.
 In this pattern instantiation is triggered by the first reference to the static member of the nested class, which only occurs in Instance. 
 
 ```c#
-   public class Spooler : Spool
+   public sealed class Spooler : Spool
     {
         
         private Spooler()
@@ -298,7 +298,7 @@ The code below implicitly uses `LazyThreadSafetyMode.ExecutionAndPublication` as
  simpler way to achieve laziness, using .NET 4 +, in my opinion tt also has the advantage that it's obviously lazy and it is clearly and implicitly stated in the code.
 
 ```c#
- public class Spooler : Spool
+ public sealed class Spooler : Spool
     {
         private static readonly Lazy<Spooler>
             lazy =
