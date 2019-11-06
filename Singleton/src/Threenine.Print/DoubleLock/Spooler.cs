@@ -1,32 +1,32 @@
+using System;
+
 namespace Threenine.Print.DoubleLock
 {
-    
     /// <summary>
     /// Do not use this pattern
     /// </summary>
-    public class Spooler : Spool
+    public sealed class Spooler : Spool
     {
-      
-            private static Spooler instance;
-            private static readonly object padlock = new object();
+       
+        private static volatile Spooler instance;
+        private static readonly object threadLock = new object();
 
-            public static Spooler Instance
+        public static Spooler Instance
+        {
+            get
             {
-                get
+                if (instance != null) return instance;
+
+                lock (threadLock)
                 {
                     if (instance == null)
                     {
-                        lock (padlock)
-                        {
-                            if (instance == null)
-                            {
-                                instance = new Spooler();
-                            }
-                        }
+                        instance = new Spooler();
                     }
-                    return instance;
                 }
+
+                return instance;
             }
         }
-        
     }
+}

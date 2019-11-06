@@ -200,6 +200,40 @@ This pattern is not recommended and has a number of issues.
         }
 ```
 
+This pattern with the help pf C# 6.0 + can be further updated by introducing the `volatile` keyword
+
+>  The volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time. The compiler, the runtime system, and even hardware may rearrange reads and writes to memory locations for performance reasons. Fields that are declared volatile are not subject to these optimizations. Adding the volatile modifier ensures that all threads will observe volatile writes performed by any other thread in the order in which they were performed. There is no guarantee of a single total ordering of volatile writes as seen from all threads of execution.
+>
+
+[Volatile (C# Reference )]()volatile (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile)
+
+```c# 
+   public sealed class Spooler : Spool
+    {
+       
+        private static volatile Spooler instance;
+        private static readonly object threadLock = new object();
+
+        public static Spooler Instance
+        {
+            get
+            {
+                if (instance != null) return instance;
+
+                lock (threadLock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Spooler();
+                    }
+                }
+
+                return instance;
+            }
+        }
+    }
+```
+
 ### Almost Lazy Singleton Pattern
 
 `static` constructors in C# execute only when an instance of the class is created or a static member is referenced, and to execute only once per AppDomain. The check for the type being newly constructed needs to be executed whatever else happens, it will be faster than adding extra checking as in the previous examples.
@@ -295,7 +329,7 @@ Other common usages for Singleton classes could be:
 * **Caching:**  Data fetching is a time consuming process whereas caching required data in the application memory avoids DB calls and Singleton can be used to handle the caching with thread synchronization.
 
 
-The singleton pattern should only be used when necessary as it can introduce a potential bottleneck for the application. Sometimes, the pattern ii may be viewed as an anti-pattern because it could introduce `Global State`. 
+The Singleton Pattern should only be used when necessary as it can introduce a potential bottleneck for the application. Sometimes, the pattern ii may be viewed as an anti-pattern because it could introduce `Global State`. 
 
 `Global state`, unknown dependencies within an application are introduced and it then becomes unclear as to how many types might depend on the information. Additionally, many frameworks and repositories already limit access 
 when required, so introducing an additional mechanism might limit the performance unnecessarily.

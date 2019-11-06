@@ -1,11 +1,13 @@
+
 using System;
 using Threenine.Print.Simple;
 using Xunit;
 
 namespace Threenine.Print.Tests
 {
-    public class GenericLazyTests
+    public class DoubleLockTests
     {
+        
         [Fact]
         public void ShouldCreateOneInstance()
         {
@@ -32,5 +34,6 @@ namespace Threenine.Print.Tests
             
 
         }
+        
     }
 }

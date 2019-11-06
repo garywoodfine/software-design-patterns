@@ -1,6 +1,6 @@
 namespace Threenine.Print.FullLazy
 {
-    public class Spooler : Spool
+    public sealed class Spooler : Spool
     {
         
         private Spooler()

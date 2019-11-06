@@ -2,18 +2,21 @@ using System;
 
 namespace Threenine.Print.GenericLazy
 {
-    public class Spooler : Spool
+    public sealed class Spooler : Spool 
     {
-        private static readonly Lazy<Spooler>
+        private bool _disposed;
+        private static volatile Lazy<Spooler>
             lazy =
                 new Lazy<Spooler>
                     (() => new Spooler());
 
-        public static Spooler Instance { get { return lazy.Value; } }
+        public static Spooler Instance => lazy.Value;
 
         private Spooler()
         {
         }
+
+       
         
     }
 }
