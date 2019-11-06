@@ -206,7 +206,7 @@ This pattern with the help pf C# 6.0 + can be further updated by introducing the
 >  The volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time. The compiler, the runtime system, and even hardware may rearrange reads and writes to memory locations for performance reasons. Fields that are declared volatile are not subject to these optimizations. Adding the volatile modifier ensures that all threads will observe volatile writes performed by any other thread in the order in which they were performed. There is no guarantee of a single total ordering of volatile writes as seen from all threads of execution.
 >
 
-[Volatile (C# Reference )]()volatile (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile)
+[Volatile (C# Reference )](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile)
 
 ```c# 
    public sealed class Spooler : Spool
