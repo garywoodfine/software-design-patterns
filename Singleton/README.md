@@ -37,17 +37,18 @@ There are a number of different ways of implementing the Singleton Pattern in C#
 
 In our fictional implementation of the Singleton Pattern we will be using it to create Print Spooler class.  
 
-The print spooler is a software service that manages the printing process. The spooler accepts print jobs from the computer and makes sure that printer resources are available. It also schedules the order in which jobs are sent to the print queue for printing.
+The print Spooler is a software service that manages the printing process. The Spooler accepts print jobs from the computer and makes sure that printer resources are available. It also schedules the order in which jobs are sent to the print queue for printing.
  
  In the early days of personal computers, you had to wait until a document printed before you could do anything else. Thanks to modern print spoolers, the printing process has minimal impact on user productivity.
  
  ### Processes and Threads
  
  In order to understand the singleton pattern, it is important to understand the context in which it will operate. In the .Net Framework, an application will be composed of lightweight, managed sub-processes called application domains that can comprise one or more managed threads. 
- For the purpose of understanding the singleton pattern, let's define this as a multithreaded application that contains one or more threads running simultaneously. Technically, the threads are actually not running simultaneously, but this is 
- achieved by dividing the available processor time between the threads, so that each thread will execute for a small amount of time and then the thread will suspend activity, allowing for another thread to execute.
+ For the purpose of understanding the singleton pattern, let's define this as a multi-threaded application that contains one or more threads running simultaneously. 
  
- singleton pattern, in a multithreaded application, special care needs to be taken to ensure that access to the singleton is limited so that only one thread enters specific areas of logic at a time. Because of this synchronization of threads, 
+ Technically, the threads are actually not running simultaneously, but this is achieved by dividing the available processor time between the threads, so that each thread will execute for a small amount of time and then the thread will suspend activity, allowing for another thread to execute.
+ 
+ Singleton Pattern, in a multi-threaded application, special care needs to be taken to ensure that access to the singleton is limited so that only one thread enters specific areas of logic at a time. Because of this synchronization of threads, 
  it is possible for one thread to retrieve a value and update it, and, before it can be stored, another thread also updates the value.
  
  To avoid data being updated incorrectly, restriction is required to prevent more than one thread from executing the same block of logic at the same time. There are several mechanisms supported in the .Net Framework and, 
