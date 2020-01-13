@@ -310,8 +310,7 @@ The code below implicitly uses `LazyThreadSafetyMode.ExecutionAndPublication` as
         private Spooler()
         {
         }
-        
-    }
+   }
 ``` 
 
 #### Example Scenarios for Singleton Classes
@@ -334,6 +333,8 @@ The Singleton Pattern should only be used when necessary as it can introduce a p
 
 `Global state`, unknown dependencies within an application are introduced and it then becomes unclear as to how many types might depend on the information. Additionally, many frameworks and repositories already limit access 
 when required, so introducing an additional mechanism might limit the performance unnecessarily.
+
+
 
 
  

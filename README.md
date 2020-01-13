@@ -19,9 +19,9 @@ Software Design patterns are typically categorised into three groups.
 |Creational Patterns  |  |
 | ----------| ---------------------------------- |
 | [Simple Factory](https://garywoodfine.com/simple-factory-pattern/) |interfaces for creating objects without exposing the object creation logic  |
- [Factory Method](https://garywoodfine.com/factory-method-design-pattern/) |	Creates an instance of several derived classes  |
+| [Factory Method](https://garywoodfine.com/factory-method-design-pattern/) |	Creates an instance of several derived classes  |
 | [Abstract Factory](https://garywoodfine.com/abstract-factory-design-pattern/) |Creates an instance of several families of classes  | 
-|[Builder](https://garywoodfine.com/the-builder-pattern-net-core/) |Separates object construction from its representation  | 
+| [Builder](https://garywoodfine.com/the-builder-pattern-net-core/) |Separates object construction from its representation  | 
 | [Prototype](https://garywoodfine.com/the-prototype-design-pattern-c-net-core/) |A fully initialized instance to be copied or cloned  | 
 | [Singleton](https://garywoodfine.com/singleton-design-pattern-c-net-core/) |	A class of which only a single instance can exist  | 
 ---------------------------------------------------------------------------------
@@ -29,13 +29,13 @@ Software Design patterns are typically categorised into three groups.
 
 |Structural Patterns  |  |
 | ----------| ---------------------------------- |
-|  Adapter |Match interfaces of different classes | 
-| Bridge |Separates an object’s interface from its implementation | 
-|Composite |A tree structure of simple and composite objects | 
-| Decorator |Add responsibilities to objects dynamically | 
-|Facade |A single class that represents an entire subsystem | 
-|Flyweight |A fine-grained instance used for efficient sharing | 
-|Proxy |An object representing another object | 
+| Adapter | Match interfaces of different classes | 
+| Bridge | Separates an object’s interface from its implementation | 
+| Composite | A tree structure of simple and composite objects | 
+| Decorator | Add responsibilities to objects dynamically | 
+| Facade | A single class that represents an entire subsystem | 
+| Flyweight | A fine-grained instance used for efficient sharing | 
+| Proxy | An object representing another object | 
 
 ------------------------------------------------------------------------------------
  	
