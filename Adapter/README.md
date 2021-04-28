@@ -27,4 +27,3 @@ There are a number of situations when making use of the Adapter pattern can be a
 * Allow communication between a new and already existing system that is independent of each other.
 * Sometimes a toolkit or class library cannot be used because its interface is incompatible with the interface required by an application.
 
-Skills 
