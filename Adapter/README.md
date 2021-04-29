@@ -58,7 +58,6 @@ However, the only class you have a available is `Bicycle` class that has a `Peda
         {
             Console.WriteLine("Pedaling");
         }
-
     }
 ```
 
