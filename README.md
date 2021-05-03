@@ -29,7 +29,7 @@ Software Design patterns are typically categorised into three groups.
 
 |Structural Patterns  |  |
 | ----------| ---------------------------------- |
-| Adapter | Match interfaces of different classes | 
+| [Adapter](https://garywoodfine.com/the-adapter-pattern) | Match interfaces of different classes | 
 | Bridge | Separates an object’s interface from its implementation | 
 | Composite | A tree structure of simple and composite objects | 
 | Decorator | Add responsibilities to objects dynamically | 
