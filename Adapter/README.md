@@ -9,6 +9,10 @@ The Adapter design pattern is a structural pattern that allows incompatible inte
 
 This is essentially a physical implementation of the Adapter pattern.  [Head First Design Patterns](https://amzn.to/3tSqSVo "Head First Design Patterns: Building Extensible and Maintainable Object-Oriented Software")  provides a really good succinct definition of the Adapter Pattern.
 
+> The Adapter pattern allows you to provide an object instance to a client that has a dependency on an interface that your instance does not implement. An Adapter class is created that fulfils the expected interface of the client but that implements the methods of the interface by delegating to different methods of another object.
+> 
+> [Adaptive Code: Agile coding with design patterns and SOLID principles]()
+
 ### Two types of Adapters.
 
 There are typically two kinds of of adapters:
