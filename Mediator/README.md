@@ -26,7 +26,33 @@ When working with Domain Classes where multiple functions are used to modify sta
 
 A common challenge in a codebase, is dealing with the constant flux of ever changing domain requirements and business rules.
 
-Typically software software start out as simple CRUD applications, but gradually evolve to become complex as more rules and changes are introduced.
+Typically software services start out as simple CRUD applications, but gradually evolve to become complex as more rules and changes are introduced.
 
+Developers may initially try to solve this problem, by implementing a *Manager* class to centralise the logic to contain every action possible to modify the state of an entity or to modify the state of another *manager* class.
 
+Testing often becomes convoluted, messy, complex and usually incomplete. Typically the problems occur when in order to test the class there are a number of dependencies to mock and configure. Just to test a new function.
 
+Typically no validation of the inbound request is implemented, and the request is allowed to pass through the middle layer, API layer and only validated within the Manager class functions. This often causes bloated action functions with complicated validation rules before the implementation logic!
+
+### How does the Mediator pattern solve issues
+
+The mediator pattern promotes loose coupling, by implementing a mediator object to enable objects to communicate with it rather than each other.
+
+## Example of the mediator pattern
+
+In [Developing Api’s using Http Endpoints](https://garywoodfine.com/developing-apis-using-http-endpoints/) I discussed some of the problems relating to using MVC pattern to developing Web API projects and how to overcome by making use of the [Adralis API Endpoints](https://github.com/ardalis/ApiEndpoints) and I even created a [API Template project](https://garywoodfine.com/how-to-create-project-templates-in-net-core/) to help you get started. In this example we are going to make use of the template to create a project to illustrate how to use the Mediator Pattern, and we will also be making use of MediatR, because the template project comes pre-configured to use it.
+
+Once you have [installed the template](https://www.nuget.org/packages/threenine.ApiProject/)  we can create a new project using
+
+```c#
+dotnet new apiproject -n mediator
+```
+Once the project has been generated, we will have have all that is required done for us to provide the most simplistic example of the Mediator pattern.
+
+It is important that the basis of the Mediator pattern, is Request & Response mediation. 
+
+> Mediator promotes loose coupling by keeping objects from referring to each other explicitly and it lets you vary their interaction independently
+> 
+>  [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck ) 
+
+![](https://garywoodfine.com/wp-content/uploads/2021/05/mediator.png)
