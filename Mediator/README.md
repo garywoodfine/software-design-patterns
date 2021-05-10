@@ -19,7 +19,7 @@ A drawback of the Mediator pattern is that without a proper design the Mediator 
 Fortunately, in C# Jimmy Bogard, of [Automapper](https://github.com/AutoMapper/AutoMapper) fame has also developed [MediatR - Simple mediator implementation in .NET](https://github.com/jbogard/MediatR).  MediatR supports  request/response, commands, queries, notifications and events, synchronous and async with intelligent dispatching via C# generic variance.
 
 
-I prefer to use MediatR as my implementation of choice of the Mediator Pattern, because of its ease of use and versatility. I also learned alot about code by reading the MediatR source code. It is well worth cloning the repository and spending sometime just going through the implementation, it will provide one with a good sense of how to implement the pattern and also an appreciation of some of the finer points of the C# language.
+I prefer to use MediatR as my implementation of choice of the Mediator Pattern, because of its ease of use and versatility. I also learned a lot about code by reading the MediatR source code. It is well worth cloning the repository and spending sometime just going through the implementation, it will provide one with a good sense of how to implement the pattern and also an appreciation of some of the finer points of the C# language.
 
 ###  Why use the Mediator pattern
 When working with Domain Classes where multiple functions are used to modify state and implement domain rules it usually becomes difficult to debug, extend and review the implementation.  Often business rule functions implement multiple sub-rules that are repeatedly required elsewhere in the domain. This may lead to Multiple layers of complex abstraction required to share functionality or multiple strategies from several developers advocating different patterns and practices.
@@ -47,7 +47,9 @@ Once you have [installed the template](https://www.nuget.org/packages/threenine.
 ```c#
 dotnet new apiproject -n mediator
 ```
-Once the project has been generated, we will have have all that is required done for us to provide the most simplistic example of the Mediator pattern.
+Once the project has been generated, we will have have all that is required done for us to provide the most simplistic example of the Mediator pattern. 
+
+**The Sample project is also generated using what is known as [Vertical Slice Architecture](https://jimmybogard.com/vertical-slice-architecture/)**
 
 It is important that the basis of the Mediator pattern, is Request & Response mediation. 
 
