@@ -58,3 +58,4 @@ It is important that the basis of the Mediator pattern, is Request & Response me
 >  [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck ) 
 
 ![](https://garywoodfine.com/wp-content/uploads/2021/05/mediator.png)
+
