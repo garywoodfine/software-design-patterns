@@ -9,6 +9,7 @@ In software development a Software Design Pattern is a reusable solution to comm
 
  Through a series of blog posts on [garywoodfine.com](https://garywoodfine.com) I will discuss these patterns and more on how C# .net core developers can implement these patterns in cross platform .net core software solutions.
 
+### [Software Design Patterns](https://garywoodfine.com/software-design-patterns/)
 
 # Contents
 
@@ -46,7 +47,7 @@ Software Design patterns are typically categorised into three groups.
 |Command|	Encapsulate a command request as an object|
 |Interpreter|	A way to include language elements in a program|
 |Iterator|	Sequentially access the elements of a collection|
-|Mediator|	Defines simplified communication between classes|
+|[Mediator](https://garywoodfine.com/the-mediator-pattern/)|	Defines simplified communication between classes|
 |Memento|	Capture and restore an object's internal state|
 |Observer|	A way of notifying change to a number of classes|
 |State|	Alter an object's behavior when its state changes|
