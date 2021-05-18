@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace mediator.Activities.Sample.Get
+namespace mediator.Content.Activities.Salutations
 {
-    public class Request : IRequest<Response>
+    public class GetSalutationQuery : IRequest<SalutationResponse>
     {
         [FromRoute(Name = "id")] public string Id { get; set; }
     }

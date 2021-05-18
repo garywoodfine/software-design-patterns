@@ -38,9 +38,11 @@ Typically no validation of the inbound request is implemented, and the request i
 
 The mediator pattern promotes loose coupling, by implementing a mediator object to enable objects to communicate with it rather than each other.
 
-## Example of the mediator pattern
+## Example of the mediator pattern using MediatR
 
-In [Developing Api’s using Http Endpoints](https://garywoodfine.com/developing-apis-using-http-endpoints/) I discussed some of the problems relating to using MVC pattern to developing Web API projects and how to overcome by making use of the [Adralis API Endpoints](https://github.com/ardalis/ApiEndpoints) and I even created a [API Template project](https://garywoodfine.com/how-to-create-project-templates-in-net-core/) to help you get started. In this example we are going to make use of the template to create a project to illustrate how to use the Mediator Pattern, and we will also be making use of MediatR, because the template project comes pre-configured to use it.
+In [Developing Api’s using Http Endpoints](https://garywoodfine.com/developing-apis-using-http-endpoints/) I discussed some of the problems relating to using MVC pattern to developing Web API projects and how to overcome by making use of the [Adralis API Endpoints](https://github.com/ardalis/ApiEndpoints) and I even created a [API Template project](https://garywoodfine.com/how-to-create-project-templates-in-net-core/) to help you get started. 
+
+In this very simplified example we are going to make use of the template to create a basic project structure to illustrate how to use the Mediator Pattern, and we will also be making use of [MediatR](https://github.com/jbogard/MediatR/wiki), primarily because the template project comes pre-configured to use it.
 
 Once you have [installed the template](https://www.nuget.org/packages/threenine.ApiProject/)  we can create a new project using
 
@@ -49,13 +51,124 @@ dotnet new apiproject -n mediator
 ```
 Once the project has been generated, we will have have all that is required done for us to provide the most simplistic example of the Mediator pattern. 
 
-**The Sample project is also generated using what is known as [Vertical Slice Architecture](https://jimmybogard.com/vertical-slice-architecture/)**
+**The Sample project is also generated using what is known as [Vertical Slice Architecture](https://jimmybogard.com/vertical-slice-architecture/) or Feature Slices which are Structural Pattern and methodology that aims for logic separation for components and library code**
 
-It is important that the basis of the Mediator pattern, is Request & Response mediation. 
+It is important that the basis of the Mediator pattern, is Request & Response mediation or what is more commonly known as the [CQRS (*Command Query Responsibility Segregation*)](https://articles.geekiam.io/what-is-cqrs "What is CQRS | Geek.I.Am") . 
 
 > Mediator promotes loose coupling by keeping objects from referring to each other explicitly and it lets you vary their interaction independently
 > 
 >  [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck ) 
 
-![](https://garywoodfine.com/wp-content/uploads/2021/05/mediator.png)
+
+![Mediator Pattern](https://garywoodfine.com/wp-content/uploads/2021/05/mediator.png)
+
+In order to speed things up even more, I am also going to use a few other products I have developed to quickly build out the other infrastructure details. Hence, I will be making use of the [ThreeNine.Data - Generic Repository](https://www.nuget.org/packages/Threenine.Data/ "Threenine.Data | Nuget") which I discussed in more detail in [Using the Repository and Unit Of Work Pattern in .net core](https://garywoodfine.com/generic-repository-pattern-net-core/) and also the [Code First Database library Nuget package](https://www.nuget.org/packages/Boleyn.Database.Postgre/) from our [Headless CMS](https://threenine.co.uk/what-is-a-headless-cms/) we are currently in the process of developing.
+
+I will not discuss the whole process of setting up the project to use these libraries because the [source code](https://github.com/garywoodfine/software-design-patterns/tree/master/Mediator) is for this example is available. For the purpose of this article we will only discuss the Mediator pattern implementation.
+
+We will implement functionality to Create a new Salutation, which is essentially a polite expression of greeting, which covers things like Mr., Mrs. , Prof. etc.  Our simplistic API endpoint is simply going to enable adding new items to the list.
+
+In our application configuration in the `Startup.cs` we will first enable MediatR to essentially scan our assembly and automatically wire up all Mediator Handlers it finds ready to be used.  We'll do this by simply adding the `services.AddMediatR(typeof(Startup));` in our `ConfigureServices` method.
+
+```c#
+ public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "mediator", Version = "v1"});
+                c.EnableAnnotations();
+            });
+            services.AddAutoMapper(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
+            services.AddDbContext<BoleynContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("mediator"))
+            ).AddUnitOfWork<BoleynContext>();
+        }
+```
+
+We'll create a new Api Endpoint as `Post` , the most important details are that we simply dependency inject `IMediator` object into our class, which has been made possible because of the step we carried out earlier of instructing MediatR to scan our assembly and wire up all the handlers.
+
+You notice that we have configured our endpoint to Accept a request, which will contain a command, and that our endpoint will not provide a Response. Although it is still important to remember our Endpoint will still provide an ActionResult response, but in this instance it means that endpoint will not be providing an Object response.
+
+```c#
+ [Route(RouteNames.Salutations)]
+    public class Post : BaseAsyncEndpoint.WithRequest<CreateSalutationCommand>.WithoutResponse
+    {
+        private readonly IMediator _mediator;
+
+        public Post(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+        
+        [HttpPost]
+        [SwaggerOperation(
+            Summary = "Create a new salutation",
+            Description = "",
+            OperationId = "AA440D51-75A5-4975-8875-C1799B58D4EB",
+            Tags = new []{RouteNames.Salutations}
+            )]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public override async Task<ActionResult> HandleAsync([FromBody] CreateSalutationCommand request, CancellationToken cancellationToken = new())
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+            return new CreatedResult( new Uri(RouteNames.Salutations, UriKind.Relative), new { id = result });
+        }
+    }
+```
+Our endpoint handler accepts a `CreateSalutationCommand` object, which in theory is an implementation of CQRS,  We need to create our  `CreateSalutationCommand` object as follows.
+
+
+```c#
+    public class CreateSalutationCommand : IRequest<int>
+    {
+        public string Abbreviation { get; set; }
+        public string FullWord  { get; set; }
+    }
+```
+You will notice our Command inherits from the `IRequest` essentially stipulate the Type that our object will request. This type can either a Primitive or Complex type, however in this case we are simply requesting an Integer return value containing the ID of the created object.
+
+We can now configure out Handler object, you will notice that we create a `class` which inherits from the `IRequestHandler` interface and accepts the `CreateSalutationCommand` and provides an `int` response type.
+
+We can inject whatever dependencies we may need into this class, in our case it will be the Mapper and Unit Of Work from our generic repository.
+
+```c#
+  public class PostHandler : IRequestHandler<CreateSalutationCommand, int>
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public PostHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+        
+        public async Task<int> Handle(CreateSalutationCommand request, CancellationToken cancellationToken)
+        {
+            var salutation = _mapper.Map<Salutation>(request);
+            var repo = _unitOfWork.GetRepositoryAsync<Salutation>();
+            await repo.InsertAsync(salutation, cancellationToken);
+            await _unitOfWork.CommitAsync();
+            return salutation.Id;
+        }
+    }
+}
+```
+In this very simple example, you'll notice that we have placed our business logic all with `Handle` method, which I would be the first to admit is not great, but it also serves to illustrate that we have separated it from our Endpoint logic.
+
+In later, articles based on MediatR, I will provide further examples of how this can further be improved enabling you to take further advantage of MediatR, but for now I just want to illustrate the Mediator Pattern at work.
+
+The take away from this example, is that you will notice that at no point do we explicitly define a reference to our Handler anywhere, in our Post endpoint, we simply make use of the `Send` function available on the `IMediator` to send our request to whichever object has been defined to satisfy the Request and Response pairing.  The Mediator, then ensures it sends it to which ever it has been configured too.
+
+### Conclusion
+The most simplest definition of the Mediator pattern is that it is an object that encapsulates how objects interact. So it can obviously handle passing Request and Response between objects.
+
+The Mediator pattern promotes loose coupling by not having objects refer to each other, but instead refer to the mediator. So they pass the messages to the mediator, who will pass it on to the object that has been defined to handle them.
+
+The CQRS pattern defined actually just an “implementation” of the mediator pattern. As long as we are promoting loose coupling through a “mediator” class that can pass data back and forth so that the caller doesn’t need to know how things are being handled, then we can say we are implementing the Mediator Pattern.
+
+
+
 

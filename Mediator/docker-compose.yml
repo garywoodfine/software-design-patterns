@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  postgres:
+    container_name: mediatr_postgre
+    image: postgres
+    environment:
+      POSTGRES_USER: mediator
+      POSTGRES_PASSWORD: password12@
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:

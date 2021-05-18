@@ -1,11 +1,15 @@
+using AutoMapper;
+using Boleyn.Database.Postgre;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Threenine.Data.DependencyInjection;
 
 namespace mediator.Content
 {
@@ -27,13 +31,22 @@ namespace mediator.Content
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "mediator", Version = "v1"});
                 c.EnableAnnotations();
             });
+            services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
+            services.AddDbContext<BoleynContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("mediator"))
+            ).AddUnitOfWork<BoleynContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSerilogRequestLogging();
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<BoleynContext>();
+                context.Database.Migrate();
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
