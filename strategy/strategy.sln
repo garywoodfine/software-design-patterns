@@ -5,8 +5,6 @@ VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrategyClient", "StrategyClient\StrategyClient.csproj", "{840DCE39-44C7-46AE-9F52-8721C47B2AF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRulesEngine", "BusinessRulesEngine\BusinessRulesEngine.csproj", "{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,17 +30,5 @@ Global
 		{840DCE39-44C7-46AE-9F52-8721C47B2AF4}.Release|x64.Build.0 = Release|Any CPU
 		{840DCE39-44C7-46AE-9F52-8721C47B2AF4}.Release|x86.ActiveCfg = Release|Any CPU
 		{840DCE39-44C7-46AE-9F52-8721C47B2AF4}.Release|x86.Build.0 = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|x64.Build.0 = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Debug|x86.Build.0 = Debug|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|x64.ActiveCfg = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|x64.Build.0 = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|x86.ActiveCfg = Release|Any CPU
-		{6F4D5DE3-2FF3-4DF1-A50E-C356FFDB1A1F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

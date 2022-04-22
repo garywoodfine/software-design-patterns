@@ -10,11 +10,11 @@ A typical example of how the Strategy pattern is implemented is illustrated in t
 
 In Strategy pattern, a class behaviour or its algorithm can be changed at run time. Enabling the creation of objects which represent various strategies and a context object whose behaviour varies as per its strategy object. The strategy object changes the executing algorithm of the context object.
 
-Another name for the Strategy pattern is *Policy*, which in my opinion provides a better clue on how this pattern can be utilised in software applications.  The most common scenario in enterpise software development where the Strategy pattern can be implemented in a Business Rules Engine.
+Another name for the Strategy pattern is *Policy*, which in my opinion provides a better clue on how this pattern can be utilised in software applications.  The most common scenario in enterprise software development where the Strategy pattern can be implemented in a Business Rules Engine.
 
 A business rules engine (BRE) is an application that manages decision processes using pre-defined logic to determine outcomes. BREs enable precise decision making, and are especially useful for complex dependencies, as well as in instances where regulatory or organizational rule changes frequently require logic changes.  
 
-An example of this may be in a Bank loan software application, there are various rules that fire based on responses to questions. If the answer is *yes* to one question or *no* to another question, the chances of approval for a loan will be impacted, and the subsequent questions will vary. These rules help guide users through the application process and help the company determine the eligibility and structure their business.
+An example of this may be in a Bank loan software application, there are various rules that can be triggered based on responses to questions. If the answer is *yes* to one question or *no* to another question, the chances of approval for a loan could be impacted or further subsequent questions may be required to further clarify financial information. These rules help guide users through the application process and help the financial institution determine the eligibility and structure their business.
 
 I recently came across [Basic Rules Engine Design Pattern](https://tenmilesquare.com/basic-rules-engine-design-pattern/ "Basic Rules Engine Design Pattern | ten mile square"), where in the author just actually describes the typical implementation of the Strategy pattern, as you'll be able to tell from the class diagram he supplied, the implementation resembles the simplified Strategy Pattern above.
 
