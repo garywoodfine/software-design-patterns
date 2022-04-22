@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace StrategyClient.Rules
@@ -8,7 +9,10 @@ namespace StrategyClient.Rules
         {
             if (choice.All(char.IsDigit))
             {
-                
+                var answer = Convert.ToInt32(choice);
+
+                if (answer is < 0 or > 10) return true;
+
             }
                 
             return false;
@@ -16,7 +20,7 @@ namespace StrategyClient.Rules
 
         public void Execute()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("We said a number between 1 and 10!");
         }
     }
 }

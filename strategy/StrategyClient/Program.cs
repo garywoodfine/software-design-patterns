@@ -17,9 +17,8 @@ namespace StrategyClient
            
         }
 
-        internal static void ProcessInput(string input)
+        private static void ProcessInput(string input)
         {
-             
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 if (!typeof(IRule).IsAssignableFrom(type) || !type.IsPublic || type.IsInterface) continue;
