@@ -15,10 +15,7 @@ namespace StrategyClient.Rules
 
         public void Execute()
         {
-           
-            var random = new Random();
-            
-            var index = random.Next(responses.Count);
+            var index = new Random().Next(responses.Count);
             Console.WriteLine(responses[index]);
         }
         

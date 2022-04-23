@@ -1,6 +1,6 @@
 # Strategy Pattern
 
-The *Strategy Pattern* is a *Behavioral Pattern* , [Software Design Patterns](https://garywoodfine.com/software-design-patterns/ "Software Design Patterns | Gary Woodfine") defined by the Gang of Four in [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck ) , it is also discussed in [Head First Design Patterns](https://amzn.to/32YhjIT "Head First Design Patterns"). 
+The *Strategy Pattern* is a *Behavioral Pattern* , [Software Design Patterns](https://garywoodfine.com/software-design-patterns/ "Software Design Patterns | Gary Woodfine") defined by the Gang of Four in [Design Patterns: Elements of Reusable Object-Oriented Software](https://amzn.to/2PdkTck ) , it is also discussed in [Head First Design Patterns](https://amzn.to/32YhjIT "Head First Design Patterns"). [](https://amzn.to/2PdkTck)
 
 The Strategy pattern enables the definition and encapsulation of a number of algorithms and make them interchangeable. The algorithms may vary independently and may deliver different outcomes and enable different behaviour, however they can all be called using the same method signature.
 
@@ -102,3 +102,40 @@ With this method now in place we can add it to our Console application.
         }
 ```
 
+If we attempt to run the application and attempt to enter any string that is not a number then we'll activate our NotANumber rule.
+
+![img.png](img.png)
+
+Let's extend our application and implement another rule, which specifies if the user enters a number 2, that a random snarky comment is generated.
+
+```csharp
+ public class SnarkyCommentRule : IRule
+ {
+    public bool Verify(string choice)
+    {
+      if (!choice.All(char.IsDigit)) return false;
+      var answer = Convert.ToInt32(choice);
+      return answer == 2;
+    }
+
+   public void Execute()
+   {
+     var index = new Random().Next(responses.Count);
+     Console.WriteLine(responses[index]);
+   }
+
+   private List<string> responses => new List<string>()
+   {
+     "To err is human to choose number 2 is plain stupid",
+     "Of all the numbers to choose you picked 2. Why?",
+     "A bird in the hand is worth 2 in the bush",
+     "You picked a couple of ones",
+     "Once bitten twice shy",
+     "An arch bishop Desmond",
+     "A vicar in a two two",
+   };
+}
+```
+If we run our application now and enter number 2 a random comment will be displayed to the user.
+
+![img_1.png](img_1.png)
