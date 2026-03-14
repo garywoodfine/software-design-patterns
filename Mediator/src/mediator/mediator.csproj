@@ -24,7 +24,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Ardalis.ApiEndpoints" Version="3.0.0" />
-        <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="AutoMapper" Version="16.1.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
         <PackageReference Include="Boleyn.Database.Postgre" Version="1.0.9" />
         <PackageReference Include="Dawn.Guard" Version="1.12.0" />
